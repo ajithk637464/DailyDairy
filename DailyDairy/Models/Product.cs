@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Components.Forms;
-
+﻿
 namespace DailyDairy.Models
 {
     public class Product
@@ -13,7 +12,8 @@ namespace DailyDairy.Models
         public bool IsUsed { get; set; }
         public DateTime? PurchaseDate { get; set; }
         public PurchaseMode ProductPurchaseMode { get; set; }
-        public IBrowserFile? bill {  get; set; }
+       // public IBrowserFile? bill {  get; set; }
+       
     }
     public enum Category
     {

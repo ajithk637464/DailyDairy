@@ -1,8 +1,10 @@
-﻿@using DailyDairy.Data
+﻿@using DailyDairy.APIService
+@using DailyDairy.Data;
+@using ShareModel;
 @inject IAppState AppState
 @page "/PurchaseDetails"
-
-@if (ProductsList.Count > 0)
+@inject ProductService productService
+@if (ProductsList?.Count > 0)
 {
     @foreach (var product in ProductsList)
     {
@@ -36,13 +38,9 @@
 
 @code
 {
-
     public List<Product> ProductsList = new();
-    protected override void OnInitialized()
+    protected async override Task OnInitializedAsync()
     {
-        if (AppState != null)
-        {  
-            ProductsList = AppState?.Products;
-        }
+        ProductsList = await productService.GetAllProducts();
     }
 }
