@@ -5,7 +5,7 @@ namespace DailyDairy.Data
     public class AppState : IAppState
     {
         //public Dictionary<DateTime, List<Product>>? Products { get; set; } = new Dictionary<DateTime, List<Product>>();
-        List<Product> IAppState.Products { get; set; } = new List<Product>()
+        public List<Product> Products { get; set; } = new List<Product>()
         { 
             new Product
             {
@@ -17,7 +17,7 @@ namespace DailyDairy.Data
                 IsNecessary = true,
                 PurchaseDate = new DateTime(2024, 11, 15),
                 ProductPurchaseMode = PurchaseMode.Online,
-                bill = null
+                //bill = null
             },
             new Product
             {
@@ -29,7 +29,7 @@ namespace DailyDairy.Data
                 IsNecessary = true,
                 PurchaseDate = new DateTime(2024, 11, 12),
                 ProductPurchaseMode = PurchaseMode.Online,
-                bill = null
+                //bill = null
             },
             new Product
             {
@@ -41,7 +41,7 @@ namespace DailyDairy.Data
                 IsNecessary = true,
                 PurchaseDate = new DateTime(2024, 10, 5),
                 ProductPurchaseMode = PurchaseMode.Offline,
-                bill = null
+                //bill = null
             },
             new Product
             {
@@ -53,7 +53,7 @@ namespace DailyDairy.Data
                 IsNecessary = true,
                 PurchaseDate = new DateTime(2024, 11, 10),
                 ProductPurchaseMode = PurchaseMode.Offline,
-                bill = null
+                //bill = null
             },
             new Product
             {
@@ -65,7 +65,7 @@ namespace DailyDairy.Data
                 IsNecessary = false,
                 PurchaseDate = new DateTime(2024, 9, 20),
                 ProductPurchaseMode = PurchaseMode.Online,
-                bill = null
+                //bill = null
             },
             new Product
             {
@@ -77,7 +77,7 @@ namespace DailyDairy.Data
                 IsNecessary = false,
                 PurchaseDate = new DateTime(2024, 7, 30),
                 ProductPurchaseMode = PurchaseMode.Online,
-                bill = null
+                //bill = null
             },
             new Product
             {
@@ -89,7 +89,7 @@ namespace DailyDairy.Data
                 IsNecessary = false,
                 PurchaseDate = new DateTime(2024, 6, 18),
                 ProductPurchaseMode = PurchaseMode.Offline,
-                bill = null
+                //bill = null
             },
             new Product
             {
@@ -101,7 +101,7 @@ namespace DailyDairy.Data
                 IsNecessary = true,
                 PurchaseDate = new DateTime(2024, 10, 3),
                 ProductPurchaseMode = PurchaseMode.Online,
-                bill = null
+                //bill = null
             },
             new Product
             {
@@ -113,7 +113,7 @@ namespace DailyDairy.Data
                 IsNecessary = false,
                 PurchaseDate = new DateTime(2024, 8, 25),
                 ProductPurchaseMode = PurchaseMode.Offline,
-                bill = null
+                //bill = null
             },
             new Product
             {
@@ -125,7 +125,7 @@ namespace DailyDairy.Data
                 IsNecessary = true,
                 PurchaseDate = new DateTime(2024, 9, 10),
                 ProductPurchaseMode = PurchaseMode.Online,
-                bill = null
+                //bill = null
             }
         };
     }
