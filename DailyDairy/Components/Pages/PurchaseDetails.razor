@@ -1,0 +1,48 @@
+﻿@using DailyDairy.Data
+@inject IAppState AppState
+@page "/PurchaseDetails"
+
+@if (ProductsList.Count > 0)
+{
+    @foreach (var product in ProductsList)
+    {
+        <div>
+            <MudCard Style="width:350px" Elevation="7">
+                <MudCardHeader>
+                    <CardHeaderAvatar>
+                        <MudAvatar Color="Color.Secondary">@product.ProductName[0]</MudAvatar>
+                    </CardHeaderAvatar>
+                    <CardHeaderContent>
+                        <MudText Typo="Typo.body1">@product.ProductName</MudText>
+                    </CardHeaderContent>
+                    <CardHeaderActions>
+                        <MudIconButton Icon="@Icons.Material.Filled.Delete" Variant="Variant.Outlined" Color="Color.Primary" Size="Size.Small" />
+                    </CardHeaderActions>
+                </MudCardHeader>
+                <MudCardContent>
+                    <MudText Typo="Typo.body2">@product.ProductDescription</MudText>
+                </MudCardContent>
+                <MudCardActions>
+                    <MudChip T="string" Color="Color.Secondary">@product.ProductCategory</MudChip>
+                    <MudChip T="string" Color="Color.Success">Rs.@product.ProductPrice</MudChip>
+                </MudCardActions>
+            </MudCard>
+        </div>
+        <br />
+        <br />
+    }
+}
+
+
+@code
+{
+
+    public List<Product> ProductsList = new();
+    protected override void OnInitialized()
+    {
+        if (AppState != null)
+        {  
+            ProductsList = AppState?.Products;
+        }
+    }
+}
