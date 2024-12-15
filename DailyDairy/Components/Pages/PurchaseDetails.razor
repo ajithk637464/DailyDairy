@@ -4,6 +4,8 @@
 @inject IAppState AppState
 @page "/PurchaseDetails"
 @inject ProductService productService
+@rendermode InteractiveServer
+
 @if (ProductsList?.Count > 0)
 {
     @foreach (var product in ProductsList)
@@ -18,7 +20,7 @@
                         <MudText Typo="Typo.body1">@product.ProductName</MudText>
                     </CardHeaderContent>
                     <CardHeaderActions>
-                        <MudIconButton Icon="@Icons.Material.Filled.Delete" Variant="Variant.Outlined" Color="Color.Primary" Size="Size.Small" />
+                        <MudIconButton Icon="@Icons.Material.Filled.Delete" Variant="Variant.Outlined" Color="Color.Primary" Size="Size.Small" OnClick="@(() => DeleteProduct(product.Id))" />
                     </CardHeaderActions>
                 </MudCardHeader>
                 <MudCardContent>
@@ -42,5 +44,9 @@
     protected async override Task OnInitializedAsync()
     {
         ProductsList = await productService.GetAllProducts();
+    }
+    public void DeleteProduct(int productId)
+    {
+        productService?.DeleteProductById(productId);
     }
 }

@@ -19,7 +19,11 @@ namespace DailyDairy.APIService
            
                 var products = await _httpClient.GetFromJsonAsync<List<Product>>("Products/GetAllProducts");
                 return products; // If successful, return the products
-           
+        }
+        public async Task DeleteProductById(int productId)
+        {
+
+            var response = await _httpClient.DeleteAsync($"Products/DeleteProduct/{productId}");
         }
     }
 }
