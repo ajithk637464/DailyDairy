@@ -4,6 +4,6 @@ namespace DailyDairy.Data
 {
     public interface IAppState
     {
-        public List<Product>? Products { get; set; }
+        public Dictionary<DateTime,List<Product>>? Products { get; set; }
     }
 }

@@ -14,12 +14,23 @@ namespace DailyDairy.APIService
         {
             _httpClient = httpClient;
         }   
-        public async Task<List<Product>> GetAllProducts()
+        public async Task<List<Product>> GetAllProducts(DateTime? date)
         {
-           
-                var products = await _httpClient.GetFromJsonAsync<List<Product>>("Products/GetAllProducts");
+            try
+            {
+                var formattedDate = date?.ToString("yyyy-MM-dd");
+                var products = await _httpClient.GetFromJsonAsync<List<Product>>($"Products/GetAllProducts/{formattedDate}");
                 return products; // If successful, return the products
-           
+            }
+            catch (Exception e) 
+            {
+                return null; 
+            }
         }
+        //public async Task DeleteProduct(int productId)
+        //{
+        //    var response = await _httpClient.DeleteAsync($"Products/DeleteProduct/{productId}");
+
+        //}
     }
 }

@@ -7,8 +7,8 @@ namespace DailyDairy.Models
         public string? ProductName { get; set; }
         public string ProductDescription { get; set; } = string.Empty;
         public decimal? ProductPrice { get; set; }
-        public Category? ProductCategory { get; set; }
-        public bool? IsNecessary { get; set; }
+        public Category ProductCategory { get; set; }
+        public bool IsNecessary { get; set; }
         public bool IsUsed { get; set; }
         public DateTime? PurchaseDate { get; set; }
         public PurchaseMode ProductPurchaseMode { get; set; }
@@ -19,6 +19,7 @@ namespace DailyDairy.Models
     {
         Electronics,
         Clothing,
+        Appliances,
         HomeGoods,
         Beauty,
         Books,
@@ -38,4 +39,5 @@ namespace DailyDairy.Models
         Online,
         Offline
     }
+    
 }

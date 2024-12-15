@@ -1,0 +1,12 @@
+.horizontal-cards-container {
+    display: flex;
+    flex-wrap: wrap; /* Allows cards to wrap to the next row if needed */
+    gap: 20px; /* Adds spacing between the cards */
+    justify-content: flex-start; /* Aligns cards to the left, or you can use 'center' for center alignment */
+}
+
+.card-container {
+    flex: 1 1 350px; /* Makes each card responsive and ensures they take up at least 350px */
+    max-width: 350px; /* Optional: Limits the width of the cards */
+}
+

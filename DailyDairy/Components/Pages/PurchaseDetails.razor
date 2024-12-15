@@ -4,43 +4,88 @@
 @inject IAppState AppState
 @page "/PurchaseDetails"
 @inject ProductService productService
+@rendermode InteractiveServer
+@using MudBlazor
+@inject IJSRuntime JSRuntime
+@using DailyDairy.Components.Pages.ChildComponenets
+
+<label for="datePicker">Pick a Date:</label>
+<input type="date" id="datePicker" @onchange="OnDateSelected" />
+<h3>SelectedDate: @SelectedDate</h3>
+<br>
+<br>
+<br>
+
 @if (ProductsList?.Count > 0)
 {
-    @foreach (var product in ProductsList)
-    {
-        <div>
-            <MudCard Style="width:350px" Elevation="7">
-                <MudCardHeader>
-                    <CardHeaderAvatar>
-                        <MudAvatar Color="Color.Secondary">@product.ProductName[0]</MudAvatar>
-                    </CardHeaderAvatar>
-                    <CardHeaderContent>
-                        <MudText Typo="Typo.body1">@product.ProductName</MudText>
-                    </CardHeaderContent>
-                    <CardHeaderActions>
-                        <MudIconButton Icon="@Icons.Material.Filled.Delete" Variant="Variant.Outlined" Color="Color.Primary" Size="Size.Small" />
-                    </CardHeaderActions>
-                </MudCardHeader>
-                <MudCardContent>
-                    <MudText Typo="Typo.body2">@product.ProductDescription</MudText>
-                </MudCardContent>
-                <MudCardActions>
-                    <MudChip T="string" Color="Color.Secondary">@product.ProductCategory</MudChip>
-                    <MudChip T="string" Color="Color.Success">Rs.@product.ProductPrice</MudChip>
-                </MudCardActions>
-            </MudCard>
+    <MudItem>
+        <div class="horizontal-cards-container">
+            @foreach (var product in ProductsList)
+            {
+                <div class="card-container">
+                    <MudCard Style="width:350px" Elevation="7">
+                        <MudCardHeader>
+                            <CardHeaderAvatar>
+                                <MudAvatar Color="Color.Secondary">@product.ProductName[0]</MudAvatar>
+                            </CardHeaderAvatar>
+                            <CardHeaderContent>
+                                <MudText Typo="Typo.body1">@product.ProductName</MudText>
+                            </CardHeaderContent>
+                            <CardHeaderActions>
+                                <MudIconButton Icon="@Icons.Material.Filled.Delete" OnClick="@(() => DeleteRecord(product.Id))" Variant="Variant.Outlined" Color="Color.Primary" Size="Size.Small" />
+                            </CardHeaderActions>
+                        </MudCardHeader>
+                        <MudCardContent>
+                            <MudText Typo="Typo.body2">@product.ProductDescription</MudText>
+                        </MudCardContent>
+                        <MudCardActions>
+                            <MudChip T="string" Color="Color.Secondary">@product.ProductCategory</MudChip>
+                            <MudChip T="string" Color="Color.Success">Rs.@product.ProductPrice</MudChip>
+                        </MudCardActions>
+                    </MudCard>
+                </div>
+            }
         </div>
-        <br />
-        <br />
-    }
+    </MudItem>
 }
-
-
+<button @onclick="ShowChildForm">Open Product Form</button>
+<div id="productFormModal" style="display:none;">
+</div>
 @code
 {
+    private DateTime? SelectedDate = DateTime.Now;
     public List<Product> ProductsList = new();
     protected async override Task OnInitializedAsync()
     {
-        ProductsList = await productService.GetAllProducts();
+        ProductsList = await productService.GetAllProducts(SelectedDate);
+    }
+    public async void DeleteRecord(int productId)
+    {
+        var deleteProduct = ProductsList?.Find(x => x.Id == productId);
+        if (deleteProduct != null)
+        {
+            ProductsList?.Remove(deleteProduct);
+        }
+        //await productService.DeleteProduct(productId);
+        StateHasChanged();
+    }
+    private async  void OnDateSelected(ChangeEventArgs e)
+    {
+        if (DateTime.TryParse(e.Value?.ToString(), out var parsedDate))
+        {
+            SelectedDate = parsedDate;
+            ProductsList = await productService.GetAllProducts(SelectedDate);
+            StateHasChanged();
+        }
+    }
+    private async Task ShowChildForm()
+    {
+        // Show modal using JavaScript
+        await JSRuntime.InvokeVoidAsync("showModal");
+    }
+    public enum OrderBy
+    {
+        ByTime,
+        ByCost
     }
 }

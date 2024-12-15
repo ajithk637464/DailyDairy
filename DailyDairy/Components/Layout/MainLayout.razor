@@ -11,24 +11,28 @@
             <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
             <link href="_content/MudBlazor/MudBlazor.min.css" rel="stylesheet" />
             <script src="_content/MudBlazor/MudBlazor.min.js"></script>
+            <link href="css/style.css" rel="stylesheet" />
+            
         </div>
 
         <article class="content px-4">
+            @* Required *@
+            <MudThemeProvider />
+            <MudPopoverProvider />
+
+            @* Needed for dialogs *@
+            <MudDialogProvider />
+
+            @* Needed for snackbars *@
+            <MudSnackbarProvider />
             @Body
+            <script src="js/script.js"></script>
         </article>
     </main>
 </div>
 
 <div id="blazor-error-ui">
-    @* Required *@
-    <MudThemeProvider />
-    <MudPopoverProvider />
-
-    @* Needed for dialogs *@
-    <MudDialogProvider />
-
-    @* Needed for snackbars *@
-    <MudSnackbarProvider />
+   
     An unhandled error has occurred.
     <a href="" class="reload">Reload</a>
     <a class="dismiss">🗙</a>
